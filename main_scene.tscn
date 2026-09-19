@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://gkfr8u5ddqoe" path="res://Tiles.png" id="1_0f027"]
 [ext_resource type="Texture2D" uid="uid://by8e5dd4t8r7p" path="res://Background.png" id="1_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://bbpwuk6pg6nng" path="res://player.tscn" id="3_gyfs4"]
+[ext_resource type="Texture2D" uid="uid://oh3x4ghr8k73" path="res://boar-idle.png" id="4_d5x1h"]
+[ext_resource type="Script" uid="uid://cr5c67ha32xlv" path="res://enemy.gd" id="4_hq1ik"]
+[ext_resource type="Texture2D" uid="uid://bxrapw6n8pnls" path="res://Boar-Run-Sheet.png" id="5_8mm7a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c62f"]
 texture = ExtResource("1_0f027")
@@ -540,6 +543,92 @@ texture = ExtResource("1_0f027")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_2c62f")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mm7a"]
+atlas = ExtResource("4_d5x1h")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq1ik"]
+atlas = ExtResource("4_d5x1h")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfk4m"]
+atlas = ExtResource("4_d5x1h")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66tet"]
+atlas = ExtResource("4_d5x1h")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ycvg"]
+atlas = ExtResource("5_8mm7a")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr18j"]
+atlas = ExtResource("5_8mm7a")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwutr"]
+atlas = ExtResource("5_8mm7a")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_671wp"]
+atlas = ExtResource("5_8mm7a")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo76n"]
+atlas = ExtResource("5_8mm7a")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42l1d"]
+atlas = ExtResource("5_8mm7a")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fx7bn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mm7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq1ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfk4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66tet")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ycvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr18j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwutr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_671wp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo76n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42l1d")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fx7bn"]
+size = Vector2(69, 50)
+
 [node name="Node2D" type="Node2D" unique_id=130550479]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=793713747]
@@ -551,10 +640,10 @@ texture = ExtResource("1_d5x1h")
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1294064287]
 texture_filter = 1
-offset_left = 1096.0
-offset_top = 15.0
-offset_right = 2128.0
-offset_bottom = 604.0
+offset_left = 1117.0
+offset_top = 1.0
+offset_right = 2149.0
+offset_bottom = 590.0
 texture = ExtResource("1_d5x1h")
 stretch_mode = 6
 
@@ -573,3 +662,23 @@ tile_map_data = PackedByteArray("AAAAABAAAAAJAA8AAAAAABEAAAAJAA8AAAAAABIAAAAJAA8
 tile_set = SubResource("TileSet_fx7bn")
 
 [node name="Player" parent="." unique_id=1126759429 instance=ExtResource("3_gyfs4")]
+
+[node name="CollisionShape2D" parent="Player" index="2" unique_id=2144780166]
+position = Vector2(117, 454)
+
+[node name="enemy" type="CharacterBody2D" parent="." unique_id=1504779690]
+script = ExtResource("4_hq1ik")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy" unique_id=402239886]
+texture_filter = 1
+position = Vector2(1795, 479)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_fx7bn")
+animation = &"run"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy" unique_id=1120299332]
+position = Vector2(1790.5, 486)
+shape = SubResource("RectangleShape2D_fx7bn")
+
+[editable path="Player"]
