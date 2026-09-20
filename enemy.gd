@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 150
+var speed = 300
 const JUMP_VELOCITY = -400.0
 @onready var enemy: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player: Area2D = $"../Player/playerarea"
