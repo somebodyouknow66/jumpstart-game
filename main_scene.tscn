@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://gkfr8u5ddqoe" path="res://Tiles.png" id="1_0f027"]
 [ext_resource type="Texture2D" uid="uid://by8e5dd4t8r7p" path="res://Background.png" id="1_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://bbpwuk6pg6nng" path="res://player.tscn" id="3_gyfs4"]
+[ext_resource type="FontFile" uid="uid://ba5lhof47m2jj" path="res://Felipa-Regular.ttf" id="4_8mm7a"]
 [ext_resource type="PackedScene" uid="uid://dei0t4sj6c08y" path="res://enemy.tscn" id="4_d5x1h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c62f"]
@@ -564,6 +565,12 @@ sources/0 = SubResource("TileSetAtlasSource_2c62f")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gfmi"]
 size = Vector2(49, 102)
 
+[sub_resource type="Theme" id="Theme_d5x1h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hq1ik"]
+bg_color = Color(0.92941177, 0, 0, 0.7019608)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
 [node name="Node2D" type="Node2D" unique_id=130550479]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=793713747]
@@ -615,13 +622,35 @@ position = Vector2(-8, -3)
 position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_6gfmi")
 
+[node name="ProgressBar" type="ProgressBar" parent="Player" unique_id=2049283106]
+offset_left = -63.0
+offset_top = -102.0
+offset_right = 66.0
+offset_bottom = -75.0
+theme = SubResource("Theme_d5x1h")
+theme_override_fonts/font = ExtResource("4_8mm7a")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_hq1ik")
+value = 100.0
+
 [node name="enemy" parent="." unique_id=201602888 instance=ExtResource("4_d5x1h")]
 position = Vector2(2238, 485)
 
-[node name="AnimatedSprite2D" parent="enemy" index="0" unique_id=927607247]
+[node name="ProgressBar" type="ProgressBar" parent="enemy" unique_id=1873833168]
+offset_left = -72.0
+offset_top = -61.0
+offset_right = 57.0
+offset_bottom = -34.0
+theme = SubResource("Theme_d5x1h")
+theme_override_fonts/font = ExtResource("4_8mm7a")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/background = SubResource("StyleBoxFlat_hq1ik")
+value = 100.0
+
+[node name="AnimatedSprite2D" parent="enemy" index="1" unique_id=927607247]
 position = Vector2(0, 0)
 
-[node name="CollisionShape2D" parent="enemy" index="1" unique_id=913144964]
+[node name="CollisionShape2D" parent="enemy" index="2" unique_id=913144964]
 position = Vector2(-6, 5)
 
 [editable path="Player"]
