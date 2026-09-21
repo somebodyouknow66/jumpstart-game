@@ -84,11 +84,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"run",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx7bn"]
-size = Vector2(64, 42)
+size = Vector2(55, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gfmi"]
+size = Vector2(37, 30)
 
 [node name="enemy" type="CharacterBody2D" unique_id=201602888]
 script = ExtResource("1_qi2p4")
@@ -98,9 +101,17 @@ texture_filter = 1
 position = Vector2(334, 485)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_fx7bn")
-animation = &"run"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=913144964]
-position = Vector2(328, 490)
+position = Vector2(332.5, 490)
 shape = SubResource("RectangleShape2D_fx7bn")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=787954974]
+position = Vector2(334, 485)
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1512844790]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_6gfmi")
+debug_color = Color(0.98805624, 0, 0.31137228, 0.41960785)

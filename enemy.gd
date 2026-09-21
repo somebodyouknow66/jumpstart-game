@@ -6,6 +6,9 @@ const JUMP_VELOCITY = -400.0
 @onready var enemy: AnimatedSprite2D = $AnimatedSprite2D
 @onready var player: Area2D = $"../Player/playerarea"
 @onready var collision_shape: CollisionShape2D = $"../Player/CollisionShape2D"
+@onready var attack_area: Area2D = $AttackArea
+@onready var health_bar: ProgressBar = $HealthBar
+var been_hit = false
 
 
 
@@ -27,6 +30,15 @@ func _physics_process(delta: float) -> void:
 		enemy.flip_h = false
 
 	
-		
+
 		
 	move_and_slide()
+	
+	
+
+	if attack_area.has_overlapping_bodies():
+		for body in attack_area.get_overlapping_bodies():
+			if body.name == "Player" and Attacking.attacking == true and not been_hit:
+				health_bar.value -= 10
+				been_hit = true
+		

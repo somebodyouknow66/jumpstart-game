@@ -1,12 +1,28 @@
 extends CharacterBody2D
 
 
-const SPEED = 400.0
-const JUMP_VELOCITY = -900.0
+const SPEED = 450.0
+const JUMP_VELOCITY = -1000.0
 @onready var player: AnimatedSprite2D = $AnimatedSprite2D
+@onready var health_bar: ProgressBar = $HealthBar
+var timer := 1.0
+var timer_reset := 0.5
+var damage := 10
+@onready var player_area: Area2D = $playerarea
+@onready var enemy_health_bar: ProgressBar = $"../enemy/HealthBar"
+
+
+
 
 
 func _physics_process(delta: float) -> void:
+	
+	timer -= delta 
+	
+	if health_bar.value <= 0:
+		player.play("dead")
+		return
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -22,19 +38,36 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	if not is_on_floor():
-		player.play("jump")
-	elif direction: 
-		player.play("run")
-	else:
-		player.play("idle")
+		
+	#attacking animation
+	if Input.is_action_just_pressed("attack") and not Attacking.attacking:
+		Attacking.attacking = true
+		player.play("attack")
+		
+	if not Attacking.attacking: 
+		if not is_on_floor():
+			player.play("jump")
+		elif direction: 
+			player.play("run")
+		else:
+			player.play("idle")
 	
 	if direction > 0:
 		player.flip_h = false
 	if direction < 0: 
 		player.flip_h = true
-	
+		
+
+	if player_area.has_overlapping_bodies():
+		for body in player_area.get_overlapping_bodies():
+			if body.name == "enemy" and timer <= 0:
+				health_bar.value -= damage
+				timer = timer_reset 
+			if Attacking.attack == true:
+				enemy_health_bar.value -= damage
+				
+
+			
 
 
 	move_and_slide()
@@ -57,4 +90,9 @@ func _physics_process(delta: float) -> void:
 			#player.play("idle")
 		#else:
 			 #player.play("idle")
-		#
+		
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if player.animation == "attack": 
+		Attacking.attacking = false
