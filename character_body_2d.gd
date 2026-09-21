@@ -9,7 +9,7 @@ var timer := 1.0
 var timer_reset := 0.5
 var damage := 10
 @onready var player_area: Area2D = $playerarea
-@onready var enemy_health_bar: ProgressBar = $"../enemy/HealthBar"
+
 
 
 
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		Attacking.attacking = true
 		player.play("attack")
 		
-	if not Attacking.attacking: 
+	if not Attacking.attacking:
 		if not is_on_floor():
 			player.play("jump")
 		elif direction: 
@@ -63,11 +63,7 @@ func _physics_process(delta: float) -> void:
 			if body.name == "enemy" and timer <= 0:
 				health_bar.value -= damage
 				timer = timer_reset 
-			if Attacking.attack == true:
-				enemy_health_bar.value -= damage
-				
-
-			
+		
 
 
 	move_and_slide()
@@ -96,3 +92,7 @@ func _physics_process(delta: float) -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if player.animation == "attack": 
 		Attacking.attacking = false
+
+
+func _on_playerarea_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
