@@ -563,7 +563,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_2c62f")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6gfmi"]
-size = Vector2(66, 96)
+size = Vector2(64, 99)
 
 [sub_resource type="Theme" id="Theme_d5x1h"]
 
@@ -619,7 +619,7 @@ position = Vector2(-13, 0)
 position = Vector2(-8, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/playerarea" unique_id=155680117]
-position = Vector2(14, 3)
+position = Vector2(12, 4)
 shape = SubResource("RectangleShape2D_6gfmi")
 
 [node name="HealthBar" type="ProgressBar" parent="Player" unique_id=2049283106]

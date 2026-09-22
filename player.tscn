@@ -208,7 +208,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 13.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -235,9 +235,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bwjto")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"dead",
-"speed": 13.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -337,7 +337,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d5x1h"]
-size = Vector2(38, 88.25)
+size = Vector2(21, 75.125)
 
 [node name="Player" type="CharacterBody2D" unique_id=1126759429]
 script = ExtResource("1_hqtel")
@@ -353,9 +353,9 @@ texture_filter = 1
 position = Vector2(128, 480)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_6gfmi")
-animation = &"attack"
+animation = &"dead"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2144780166]
-position = Vector2(131, 478.125)
+position = Vector2(132, 484)
 shape = SubResource("RectangleShape2D_d5x1h")

@@ -7,7 +7,7 @@ const JUMP_VELOCITY = -1000.0
 @onready var health_bar: ProgressBar = $HealthBar
 var timer := 1.0
 var timer_reset := 0.5
-var damage := 10
+var damage := 3
 @onready var player_area: Area2D = $playerarea
 
 
@@ -65,7 +65,6 @@ func _physics_process(delta: float) -> void:
 				timer = timer_reset 
 		
 
-
 	move_and_slide()
 	
 	
@@ -92,7 +91,5 @@ func _physics_process(delta: float) -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if player.animation == "attack": 
 		Attacking.attacking = false
-
-
-func _on_playerarea_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	if player.animation == "dead":
+		get_tree().change_scene_to_file("res://splash_screen.tscn")

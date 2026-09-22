@@ -16,6 +16,9 @@ var attacking = false
 
 
 func _physics_process(delta: float) -> void:
+	if health_bar.value <= 0:
+		queue_free()
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -33,11 +36,13 @@ func _physics_process(delta: float) -> void:
 	if attack_area.has_overlapping_bodies():
 		for body in attack_area.get_overlapping_bodies():
 			if body.name == "Player" and Attacking.attacking and not been_hit:
-				health_bar.value -= 10
+				health_bar.value -= 4
 				been_hit = true
 
 	if not Attacking.attacking:
 		been_hit = false
+		
+	
 
 
 
